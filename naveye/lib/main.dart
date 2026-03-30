@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+﻿import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'theme/app_theme.dart';
@@ -12,10 +12,15 @@ import 'screens/guidelines/user_guidelines_screen.dart';
 import 'screens/people/people_capture_screen.dart';
 import 'screens/people/people_enter_name_screen.dart';
 import 'screens/people/person_added_screen.dart';
+import 'screens/people/people_list_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
+  ));
   final prefs = await SharedPreferences.getInstance();
   final bool onboardingDone = prefs.getBool('onboarding_complete') ?? false;
   runApp(NavEyeApp(onboardingDone: onboardingDone));
@@ -41,6 +46,7 @@ class NavEyeApp extends StatelessWidget {
         AppRoutes.peopleCapture: (_) => const PeopleCaptureScreen(),
         AppRoutes.peopleEnterName: (_) => const PeopleEnterNameScreen(),
         AppRoutes.personAdded: (_) => const PersonAddedScreen(),
+        AppRoutes.peopleList: (_) => const PeopleListScreen(),
       },
     );
   }

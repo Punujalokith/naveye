@@ -1,4 +1,4 @@
-class AppRoutes {
+﻿class AppRoutes {
   static const String onboardingStart = '/';
   static const String onboardingTellUs = '/onboarding/tell-us';
   static const String onboardingHowItWorks = '/onboarding/how-it-works';
@@ -8,4 +8,5 @@ class AppRoutes {
   static const String peopleCapture = '/people/capture';
   static const String peopleEnterName = '/people/enter-name';
   static const String personAdded = '/people/added';
+  static const String peopleList = '/people/list';
 }
