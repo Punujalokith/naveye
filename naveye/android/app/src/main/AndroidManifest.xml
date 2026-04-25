@@ -1,0 +1,82 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="29"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- Foreground service — keeps detection running when screen locks -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <!-- Camera + mic foreground service types (Android 14+) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CAMERA"
+        android:minSdkVersion="34"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MICROPHONE"
+        android:minSdkVersion="34"/>
+    <!-- Wake lock — prevent CPU sleep during background detection -->
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <!-- Notification permission (Android 13+) -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <!-- Network state for connectivity monitoring -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- SMS + Location reserved for Emergency SOS (not yet implemented — removed
+         until the feature ships to avoid Play Store sensitive-permission review) -->
+
+    <uses-feature android:name="android.hardware.camera"       android:required="true"/>
+    <uses-feature android:name="android.hardware.microphone"   android:required="false"/>
+
+    <application
+        android:label="NavEye"
+        android:name="${applicationName}"
+        android:icon="@mipmap/ic_launcher">
+
+        <!-- Disable Impeller/Vulkan — fixes ImageReader null crash with camera plugin -->
+        <meta-data
+            android:name="io.flutter.embedding.android.EnableImpeller"
+            android:value="false"/>
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity=""
+            android:theme="@style/LaunchTheme"
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize">
+            <meta-data
+              android:name="io.flutter.embedding.android.NormalTheme"
+              android:resource="@style/NormalTheme"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <meta-data
+            android:name="flutterEmbedding"
+            android:value="2"/>
+
+        <!-- flutter_foreground_task: native service that keeps process alive -->
+        <service
+            android:name="com.pravera.flutter_foreground_task.service.ForegroundTaskService"
+            android:foregroundServiceType="camera|microphone"
+            android:stopWithTask="false"
+            android:exported="false"/>
+        <!-- flutter_foreground_task: restart receiver (auto-restart on boot) -->
+        <receiver
+            android:name="com.pravera.flutter_foreground_task.receiver.TaskRestartReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+    </application>
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+    </queries>
+</manifest>
