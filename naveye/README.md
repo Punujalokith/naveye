@@ -200,9 +200,11 @@ flutter run
 
 ## 🧪 Tested Devices
 
-| Device | Android Version | Status |
-|--------|----------------|--------|
-| Samsung Galaxy A30 (SM-A305F) | Android 10 (API 29) | ✅ Full functionality |
+| Device | Android Version | RAM / Storage | Device Type | Status |
+|--------|----------------|---------------|-------------|--------|
+| Samsung Galaxy A30 (SM-A305F) | Android 10 (API 29) | 3 GB / 32 GB | Low-end | ✅ Full functionality |
+| Redmi 14C (8 GB RAM) | Android 14 | 8 GB / 128 GB | Mid-range | ✅ Full functionality |
+| Samsung Galaxy S25 Ultra | Android 15 | 12 GB / 256 GB | Flagship | ✅ Full functionality |
 
 ---
 
