@@ -1,11 +1,15 @@
 # NavEye — AI Blind Assistance System
 
 <p align="center">
-  <img src="assets/images/app_icon.png" width="100" alt="NavEye Logo"/>
+  <img src="naveye/assets/images/app_icon.png" width="100" alt="NavEye Logo"/>
 </p>
 
 <p align="center">
   <strong>Real-time obstacle detection, face recognition, and voice control for visually impaired users</strong>
+</p>
+
+<p align="center">
+  🎓 <strong>Final Year Project — PUSL3190</strong>
 </p>
 
 ---
